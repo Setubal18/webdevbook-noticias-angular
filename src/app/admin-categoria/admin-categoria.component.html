@@ -1,0 +1,55 @@
+<div class="float-right">
+  <a routerLink="/admin/categorias/cadastrar" class="btn btn-primary">Cadastrar</a>
+</div>
+<h1>Categoria</h1>
+<hr>
+<div class="alert alert-success alert-dismissible fade show" *ngIf="resultado_excluir">
+  Categoria excluída com sucesso.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="alert alert-warning alert-dismissible fade show" *ngIf="resultado_excluir === false">
+  Não foi possível excluir a categoria.
+  <p class="small text-muted">{{ erro_excluir }}</p>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+ <div>
+  <table class="table mt-1 table-bordered table-hover table-striped">
+<tr>
+          <th width="5%">
+            <!--<a href="javascript:void(null)" (click)="ordenarPor('id')">#</a>-->
+          Id
+          </th>
+          <th>
+            Nome
+            <!--<a href="javascript:void(null)" (click)="ordenarPor('titulo')">Título</a>-->
+          </th>
+          <th width="30%">
+            Descrição
+            <!--<a href="javascript:void(null)" (click)="ordenarPor('autor')">Autor</a>-->
+          </th>
+          <th width="10%">
+            Ações
+          </th>
+        </tr>
+<tbody>
+        <tr *ngFor="let categoria of categoria$ | async">
+          <td>
+            {{categoria.id}}
+          </td>
+          <td>
+            {{categoria.nome}}
+          </td>
+          <td>
+            {{categoria.descricao}}
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="excluir(categoria)"><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

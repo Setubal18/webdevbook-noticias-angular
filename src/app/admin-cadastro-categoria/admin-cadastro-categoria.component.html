@@ -1,0 +1,37 @@
+<h1>Cadastrar Categoria</h1>
+<br>
+<form class="mt-1" #cadastro="ngForm" (submit)="salvar()">
+  <div *ngIf="salvar_ok" class="alert alert-success">
+    Notícia salva com sucesso!
+  </div>
+  <div *ngIf="salvar_erro" class="alert alert-warning">
+    Não foi possível salvar a categoria. Tente novamente dentro de instantes.
+  </div>
+  <div class="form-group">
+    <label for="nome">Título</label>
+    <input type="text" name="nome" id="nome" [(ngModel)]="nome" #campo_titulo="ngModel" class="form-control form-control-lg"
+      [class.is-invalid]="campo_titulo.invalid && (campo_titulo.dirty || campo_titulo.touched)" (change)="slugify_nome()"
+      required minlength="4">
+    <small class="form-text text-muted">
+      Procure definir uma categoira o que seja bastante objetivo e claro.
+    </small>
+    <div *ngIf="campo_titulo.invalid && (campo_titulo.dirty || campo_titulo.touched)" class="invalid-feedback">
+      <span *ngIf="campo_titulo.errors.required">
+        O Nome é obrigatório.
+      </span>
+      <span *ngIf="campo_titulo.errors.minlength">
+        O Nome da categoria precisa ter, pelo menos, 4 caracteres.
+      </span>
+    </div>
+    <small *ngIf="campo_titulo.valid && (campo_titulo.dirty || campo_titulo.touched)" class="form-text text-muted">
+      <strong>Esta notícia será acessada como: http://localhost:4200/categoria/{{slug}}</strong>
+    </small>
+  </div>
+  <div class="form-group">
+    <label for="descricao">Descrição</label>
+    <textarea name="descricao" class="form-control" id="descricao" [(ngModel)]="descricao"></textarea>
+  </div>
+<div>
+    <button class="btn btn-primary" [disabled]="!cadastro.form.valid">Salvar</button>
+</div>
+</form>

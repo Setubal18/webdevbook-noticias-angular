@@ -1,11 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Noticia } from './noticia.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { filter, map, tap, concat, mergeMap, concatMap, concatAll, take } from 'rxjs/operators';
-import { Database } from './database.model';
-import { forkJoin, from, of } from 'rxjs';
-import { AutoresService } from './autores.service';
-import { AutenticacaoService } from './api.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {take, tap} from 'rxjs/operators';
+import {AutoresService} from './autores.service';
+import {AutenticacaoService} from './api.service';
 
 /**
  * Serviço que encapsula e implementa as funcionalidades de acesso a dados de notícias.
@@ -21,12 +18,12 @@ export class NoticiasService {
 
   /**
    * Retorna todas as notícias.
-   * 
+   *
    * @returns Lista de todas as notícias
    */
   public todas(o: string = 'id', p: string = null, autor: number = null, filtro_publicada: boolean = null) {
     let url = this.API_URL;
-    let params = [];
+    const params = [];
     if (o) {
       params.push('ordering=' + o);
     }
@@ -70,7 +67,7 @@ export class NoticiasService {
 
   /**
    * Retorna apenas as notícias publicadas.
-   * 
+   *
    * @param q A quantidade notícias para retornar (padrão = `null`, para retornar todas as notícias)
    * @param excluirDestaque Indica se deve ou não excluir a notícia de destaque da lista (padrão = `true`)
    * @returns Lista das notícias publicadas
@@ -86,7 +83,7 @@ export class NoticiasService {
 
   /**
    * Encontra e retorna uma notícia com base no identificador.
-   * 
+   *
    * @param id O identificador da notícia
    * @returns A notícia encontrada
    */
@@ -98,7 +95,7 @@ export class NoticiasService {
 
   /**
    * Encontra e retorna a notícia de destaque.
-   * 
+   *
    * @returns A notícia encontrada
    */
   public noticiaDestaque() {
